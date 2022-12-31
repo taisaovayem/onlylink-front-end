@@ -1,24 +1,52 @@
-import 'antd/dist/antd.css';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
-import { MainLayout, NotLoginLayout } from '../shared/layouts';
+import { QueryClient, QueryClientProvider } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools';
+import { LandingLayout } from '@/layouts';
+import { StoreProvider } from '@/store';
+import * as React from 'react';
+import { useRouter, Router } from 'next/router';
+import { useWatchAuth } from '@/shared/auth/hooks';
+import { landingPages } from '@/shared/auth/models';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import 'antd/dist/reset.css';
+
+const MainApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
 
-  if (pathname === '/login') {
+  useWatchAuth();
+
+  const render = React.useMemo(() => {
+    if (landingPages.includes(pathname)) {
+      return (
+        <LandingLayout>
+          <Component {...pageProps} />
+        </LandingLayout>
+      );
+    }
     return (
-      <NotLoginLayout>
+      <LandingLayout>
         <Component {...pageProps} />
-      </NotLoginLayout>
+      </LandingLayout>
     );
-  } else {
-    return (
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
-    );
-  }
+  }, [Component, pageProps, pathname]);
+  return render;
+};
+
+function OnlyLinkApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
+  const router = useRouter();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <StoreProvider>
+        <MainApp
+          Component={Component}
+          pageProps={pageProps}
+          router={router as unknown as Router}
+        />
+        {/* <ReactQueryDevtools /> */}
+      </StoreProvider>
+    </QueryClientProvider>
+  );
 }
 
-export default MyApp;
+export default OnlyLinkApp;

@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+# Getting Started
 
 ```bash
-npm run dev
-# or
+git clone https://github.com/tmthan/onlylink-front-end.git
+```
+
+## Prepare
+
+IDE: `VS Code`
+
+Các extensions cần cài đặt:
+[ES Lint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint),
+[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode),
+[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+[http://localhost:8080](http://localhost:8080)
+
+## Run
+
+Install package:
+
+```bash
+yarn install
+```
+
+Run the development server:
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Kiểm tra sẵn sàng deploy
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Build project
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+yarn build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Build docker
 
-## Learn More
+```bash
+docker build -t onlylink-frontend .
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker run -p 8080:8080 onlylink-frontend
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Lưu ý
 
-## Deploy on Vercel
+Không tự ý thay đổi file `yarn.lock`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Nếu có thay đổi file config của tailwind thì cân stop và run lại thì mới apply css mới
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Rules
+
+### Quy tắc đặt tên:
+
+- `ComponentName`, ví dụ: `function FilterBar() {}`, `<FilterBar />`, `FilterBar.tsx`
+- `TypeName`, ví dụ: `type FilterBarProps = {}` hoặc `interface FilterBarProps {}`
+- `EnumName`, ví dụ: `enum MenuType { BREAK_POINT = 'break_point' }` hoặc `enum MenuType { BreakPoint = 'BreakPoint' }`
+- `ClassName`, ví dụ `class UserService {}`, `UserService.ts`
+- `useHookName`, ví dụ: `useDebounce`, `useDebounce.ts`, `useDebounce.tsx`
+- `helperFunction`, ví dụ: `getUserInfo()`, `getUserInfo.ts`
+- `CONSTANT_NAME`, ví dụ: `STATUS_SUCCESS = 1`. Lưu ý, `CONSTANT` sử dụng cho những hằng số đã được thiết lập từ đầu (ex: magic number), không phải dùng cho biến được lấy từ một method (`const user = getUser()`)
+- `variableName`, ví dụ: `const user = getUser()`, `let user = getUser()`
