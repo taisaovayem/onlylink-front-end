@@ -5,3 +5,4 @@ export * from './useClickOutside';
 export {
   useGuard,
 } from '../auth/hooks/useGuard';
+export * from './useFilter';

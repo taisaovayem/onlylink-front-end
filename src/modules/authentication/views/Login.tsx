@@ -87,7 +87,7 @@ export function Login() {
               <Form.Item label="Mật khẩu" help={errors?.password?.message}>
                 <TInput.TPassword control={control} name="password" />
               </Form.Item>
-              <Form.Item label=" ">
+              <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isLoading}>
                   Đăng nhập
                 </Button>
