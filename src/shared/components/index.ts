@@ -58,3 +58,4 @@ export * from "./progress/Progress";
 export * from "./skeleton/Skeleton";
 export * from "./config-provider/ConfigProvider";
 export * from "./layout/Layout";
+export * from "./confirm-button/ConfirmButton";

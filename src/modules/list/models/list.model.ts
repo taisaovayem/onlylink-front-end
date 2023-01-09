@@ -1,6 +1,6 @@
 import { User } from '@/shared/models';
 
-enum ListMode {
+export enum ListMode {
   PUBLIC = 'public',
   PRIVATE = 'private',
 }

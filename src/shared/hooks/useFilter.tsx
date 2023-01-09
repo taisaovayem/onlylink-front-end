@@ -8,16 +8,22 @@ type Options = {
   perPage?: number;
 };
 
-export function useFilter(options: Options) {
-  const [page, setPage] = React.useState(options.page ?? DEFAULT_PAGE);
+export function useFilter(options?: Options) {
+  const [page, setPage] = React.useState(options?.page ?? DEFAULT_PAGE);
   const [perPage, setPerPage] = React.useState(
-    options.perPage ?? DEFAULT_PERPAGE,
+    options?.perPage ?? DEFAULT_PERPAGE,
   );
+
+  const setPagination = React.useCallback((_page: number, _perPage: number) => {
+    setPage(_page);
+    setPerPage(_perPage);
+  }, []);
 
   return {
     page,
     perPage,
     setPage,
     setPerPage,
+    setPagination,
   };
 }

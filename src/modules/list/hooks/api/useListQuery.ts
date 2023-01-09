@@ -6,7 +6,7 @@ import {
   getPostByList,
 } from '../../api';
 
-export function useGetListByUser(
+export function useGetListByUserQuery(
   userId: string,
   page: number,
   perPage: number,
@@ -19,7 +19,7 @@ export function useGetListByUser(
   });
 }
 
-export function useGetListInfo(listId: string) {
+export function useGetListInfoQuery(listId: string) {
   return useAppQuery({
     queryKey: ['GET_LIST_INFO', listId],
     queryFn() {
@@ -28,7 +28,7 @@ export function useGetListInfo(listId: string) {
   });
 }
 
-export function useMyList(page: number, perPage: number) {
+export function useGetMyListQuery(page: number, perPage: number) {
   return useAppQuery({
     queryKey: ['GET_MY_LIST', page, perPage],
     queryFn() {
@@ -37,7 +37,7 @@ export function useMyList(page: number, perPage: number) {
   });
 }
 
-export function usePostByList(listId: string, page: number, perPage: number) {
+export function useGetPostByListQuery(listId: string, page: number, perPage: number) {
   return useAppQuery({
     queryKey: ['GET_POST_BY_LIST', listId, page, perPage],
     queryFn() {

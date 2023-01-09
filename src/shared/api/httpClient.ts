@@ -87,11 +87,12 @@ class Request {
     return this.axiosClient
       .post<RefreshTokenResponse>(
         '/api/v1/auth/access-token',
-        {},
+        {
+          refreshToken
+        },
         {
           headers: {
             ...getHeaderWithoutAuthorization(),
-            RefreshToken: refreshToken,
           },
         },
       )

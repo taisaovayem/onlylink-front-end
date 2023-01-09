@@ -32,7 +32,13 @@ export function useDeleteListMutation() {
     mutationFn: deleteList,
     onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: ['GET_LIST_BY_USER', 'GET_MY_LIST', 'GET_POST_BY_LIST'],
+        queryKey: ['GET_LIST_BY_USER'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['GET_MY_LIST'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['GET_POST_BY_LIST'],
       });
     },
   });
